@@ -24,7 +24,7 @@
 
 			<label for="basic-url" class="form-label">Birthday</label>
 
-	         <div class="form-group">
+	         <div class="form-group mb-3">
 	            <div class='input-group date' id='datetimepicker1' >
 	               <input type='text' class="form-control" name='birthday' value="<?php echo $user->birthday ?>"/>
 	               <span class="input-group-addon">
@@ -60,6 +60,7 @@
 			</div>
 
 			<button type="submit" class="btn btn-primary">Save</button>
+			<a class="btn btn-warning" href="/">Back</a>
 		</form>
 	</div>
 </body>
@@ -67,11 +68,44 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
     $('.js-example-basic-single').select2();
     $('#datetimepicker1').datepicker({
     	format: 'yyyy-mm-dd',
     });});
+
+    $("form[name='create']").validate({
+    rules: {
+      firstname: "required",
+      lastname: "required",
+      email: {
+        required: true,
+        email: true
+      },
+      password: {
+        required: true,
+        minlength: 5
+      },
+      address: "required"
+    },
+    // Specify validation error messages
+    messages: {
+      firstname: "Please enter your firstname",
+      lastname: "Please enter your lastname",
+      password: {
+        required: "Please provide a password",
+        minlength: "Your password must be at least 5 characters long"
+      },
+      email: "Please enter a valid email address"
+    },
+    // Make sure the form is submitted to the destination defined
+    // in the "action" attribute of the form when valid
+    submitHandler: function(form) {
+      form.submit();
+    }
+  });
 </script>
 </html>
